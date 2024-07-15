@@ -1,38 +1,142 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPI Payment Link Maker</title>
+    <title>Click to Pay now</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: url('https://i.postimg.cc/nr1HWbCk/Picsart-24-07-15-03-15-55-670.jpg') center center/cover no-repeat fixed; /* Background image */
+            color: #fff; /* White text color */
+            scroll-behavior: smooth; /* Smooth scrolling behavior */
+            margin: 0; /* Remove default margin */
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+            padding: 30px;
+            border: 2px solid #fff; /* White border */
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Soft white shadow */
+        }
+
+        /* Header styles */
+        .container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #4CAF50; /* Green header color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Text shadow for depth effect */
+            animation: color-change 10s infinite alternate; /* Color animation */
+        }
+
+        /* Button styles */
+        .btn-pay {
+            background-color: #4CAF50; /* Green button background */
+            color: white; /* White button text */
+            padding: 15px 40px; /* Larger padding */
+            border: none;
+            border-radius: 10px; /* Rounded corners */
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-top: 30px; /* Increased top margin */
+            transition: transform 0.2s, box-shadow 0.2s; /* Smooth transitions */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), inset 0 0 0 1px #4CAF50; /* Outer and inner shadow */
+        }
+
+        /* Button hover effect */
+        .btn-pay:hover {
+            transform: translateY(-3px); /* Move up slightly on hover */
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px #45a049; /* Enhanced outer and inner shadow on hover */
+        }
+
+        /* QR code image styles */
+        .qr-code {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            filter: hue-rotate(180deg); /* Rotate colors */
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3); /* Soft shadow */
+        }
+
+        /* Animated text at the bottom */
+        .bottom-text {
+            font-size: 1rem;
+            color: #FF4500; /* Orange color */
+            margin-top: 20px;
+            animation: color-change 5s infinite alternate, shake 0.5s infinite alternate;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Text shadow for depth effect */
+        }
+
+        /* Keyframes for color change animation */
+        @keyframes color-change {
+            0% {
+                color: #4CAF50; /* Green */
+            }
+            25% {
+                color: #FFC107; /* Yellow */
+            }
+            50% {
+                color: #2196F3; /* Blue */
+            }
+            75% {
+                color: #E91E63; /* Pink */
+            }
+            100% {
+                color: #4CAF50; /* Green */
+            }
+        }
+
+        /* Keyframes for shake animation */
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>UPI Payment Link Maker</h1>
-    <form id="upiForm">
-        <label for="upiId">UPI ID:</label>
-        <input type="text" id="upiId" name="upiId" required>
-        <br>
-        <label for="note">Note:</label>
-        <input type="text" id="note" name="note">
-        <br>
-        <button type="submit">Generate Link</button>
-    </form>
-    <p id="upiLink"></p>
+    <div class="container">
+        <h1>Click on Pay NOW</h1>
+        <img src="https://i.postimg.cc/k4CrwKKz/Picsart-24-07-15-03-15-55-670.jpg" alt="UPI QR Code" class="qr-code">
+        <!-- Replace with your actual UPI QR code or remove if not needed -->
+        <button class="btn-pay" onclick="payNow()">Pay now</button>
+        <div class="bottom-text">
+            राम राम जी  Sairam जी को पेमेंट डालने के लिए (Pay Now) के बटन पर दबाएं।<br>
+            उसके बाद अपना app phonepay Paytm mobikwik slice Amazon pay etc. में से एक चुने और पेमेंट app पर दबाए once.<br>
+            Note -: Google pay और iphone users के pay now बटन काम नही करेगा जी वे लोग qr code पर पेमेंट डाल दे।
+        </div>
+    </div>
 
     <script>
-        document.getElementById('upiForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const upiId = document.getElementById('upiId').value;
-            const note = document.getElementById('note').value;
+        function payNow() {
+            const upiId = 'Shivawarrior@slice'; // Replace with your UPI ID
+            const amount = ''; // Replace with your transaction amount
+            const note = ''; // Replace with your transaction note
+            const name = 'आपका नाम'; // Replace with your name
+            const currency = 'INR'; // Replace with your currency code (e.g., INR)
 
-            const response = await fetch('/generate-link', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ upiId, note })
-            });
+            const paymentUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&tn=${encodeURIComponent(note)}&cu=${encodeURIComponent(currency)}`;
 
-            const data = await response.json();
-            document.getElementById('upiLink').innerText = data.link;
-        });
+            // Redirect to UPI payment app
+            window.location.href = paymentUrl;
+        }
     </script>
-
-</body></html>
+</body>
+</html>
